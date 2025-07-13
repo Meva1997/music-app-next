@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Music App Next
 
-## Getting Started
+Web application developed with Next.js to explore music, manage comments, and user profiles. Features a responsive design, smooth animations with Framer Motion, and reusable components.
 
-First, run the development server:
+## Demo
+
+[View live demo on Vercel](https://vercel.com/alejandro-s-projects-f78c06da/music-app-next)
+
+## Features
+
+- Explore songs and artists.
+- Comment system.
+- User profiles.
+- Responsive design.
+- Animations with Framer Motion.
+- Reusable components in React/Next.js.
+
+## Design Planning
+
+Below you can see the first sketch made in Miro, which served as the basis for the visual and functional architecture of the application:
+
+![Initial app sketch](/public/sketch.png)
+
+> Change the image path as appropriate according to where you upload it in your repo.
+
+## Installation & Usage
 
 ```bash
+git clone https://github.com/Meva1997/music-app-next.git
+cd music-app-next
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the app in development mode.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Next.js
+- React
+- TypeScript
+- Framer Motion
+- React Icons
 
-## Learn More
+## Author
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[Meva1997](https://github.com/Meva1997)
