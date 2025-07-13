@@ -21,8 +21,6 @@ Below you can see the first sketch made in Miro, which served as the basis for t
 
 ![Initial app sketch](/public/sketch.png)
 
-> Change the image path as appropriate according to where you upload it in your repo.
-
 ## Installation & Usage
 
 ```bash
