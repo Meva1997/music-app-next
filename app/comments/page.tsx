@@ -19,7 +19,7 @@ export default function page() {
       <MainHeader title="Comments" />
 
       <main className="my-20 space-y-10">
-        <section className="scroll-container px-3 mx-auto w-3/4 h-[540px] overflow-y-auto space-y-10 overscroll-none">
+        <section className="scroll-container px-3 mx-auto max-w-4xl h-[540px] overflow-y-auto space-y-10 overscroll-none">
           {comments.map((comment, index) => (
             <Suspense key={index} fallback={<CommentsSkeleton />}>
               <CommentsSection
@@ -33,15 +33,15 @@ export default function page() {
 
         <hr className="border-green-400" />
 
-        <section className="w-3/4 mx-auto text-center">
+        <section className="flex flex-col items-center max-w-2xl mx-auto text-center">
           <h3 className="text-xl text-orange-400">Leave your comment below</h3>
           <textarea
             name=""
             id=""
             placeholder="Type your comment here..."
-            className="w-full h-32 p-2 mt-2 text-white transition-all border border-gray-300 rounded-lg resize-none outline-green-400 focus:ring-2 focus:border-green-600 focus:ring-green-600"
+            className="w-3/4 h-32 px-5 mt-2 text-white transition-all border border-gray-300 rounded-lg resize-none outline-green-400 focus:ring-2 focus:border-green-600 focus:ring-green-600"
           ></textarea>
-          <button className="px-5 py-2 mt-5 font-bold text-center text-white transition-all duration-300 bg-green-500 cursor-pointer  rounded-xl hover:bg-green-800">
+          <button className="px-5 py-2 mt-5 font-bold text-center text-white transition-all duration-300 bg-green-500 cursor-pointer rounded-xl hover:bg-green-800">
             Submit
           </button>
         </section>
