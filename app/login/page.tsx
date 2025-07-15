@@ -39,7 +39,7 @@ export default function PageLogin() {
     <>
       {isLoading ? (
         <div className="grid place-items-center h-dvh animate-fade-in">
-          <LogInLoading />
+          <LogInLoading userName="user" />
         </div>
       ) : (
         <div className="flex flex-col min-h-screen space-y-10">
@@ -58,7 +58,7 @@ export default function PageLogin() {
             <button
               type="button"
               className="w-1/3 h-8 px-2 font-bold text-white bg-red-500 cursor-pointer rounded-xl hover:bg-red-600"
-              onClick={() => signIn("spotify")}
+              onClick={() => signIn("spotify", { callbackUrl: "/" })}
             >
               Log in with Spotify
             </button>

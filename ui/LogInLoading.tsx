@@ -1,17 +1,17 @@
 import { LuLoaderPinwheel } from "react-icons/lu";
 
-export default function LogInLoading() {
+export default function LogInLoading({ userName }: { userName: string }) {
   return (
     <>
       <header className="text-center">
-        <h1 className="text-orange-400 text-4xl">Welcome back to API Music!</h1>
+        <h1 className="text-4xl text-orange-400">Welcome back to API Music!</h1>
       </header>
-      <main className="text-center space-y-10 text-3xl">
-        <p>Nice seeing you again {"user"}</p>
-        <p className=" text-green-500 animate-pulse text-2xl">Loading</p>
+      <main className="space-y-10 text-3xl text-center">
+        <p>Nice seeing you again {userName}</p>
+        <p className="text-2xl text-green-500  animate-pulse">Loading</p>
       </main>
-      <footer className="flex justify-center items-center space-x-2">
-        <LuLoaderPinwheel className="animate-spin text-7xl text-orange-400" />
+      <footer className="flex items-center justify-center space-x-2">
+        <LuLoaderPinwheel className="text-orange-400 animate-spin text-7xl" />
         <p className="text-lg text-green-500">Please wait...</p>
       </footer>
     </>

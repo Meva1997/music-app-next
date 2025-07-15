@@ -1,23 +1,25 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import MainHeader from "../../components/MainHeader";
-import { FaUserAltSlash, FaStar } from "react-icons/fa";
 import FooterRights from "../../components/FooterRights";
+import { FaUserAltSlash, FaStar } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import LogOutLoading from "../../ui/LogOutLoading";
 import { useSession, signOut } from "next-auth/react";
+import SpotifyLogoutInfoModal from "../../components/SpotifyLogoutInfoModal";
 
 export default function PageProfile() {
-  const [isLoggingOut, setIsLoggingOut] = useState(false); // Estado para controlar el renderizado
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [showSpotifyModal, setShowSpotifyModal] = useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login"); // Redirige a la página de login si no hay sesión
-    }
-  }, [status, router]);
+  // useEffect(() => {
+  //   if (status === "unauthenticated") {
+  //     setShowLoginModal(true);
+  //   }
+  // }, [status]);
 
   if (status === "loading") {
     return (
@@ -28,20 +30,23 @@ export default function PageProfile() {
   }
 
   const handleLogout = () => {
-    setIsLoggingOut(true); // Muestra la página de LogOutLoading
+    setIsLoggingOut(true);
     setTimeout(async () => {
-      await signOut({ redirect: false }); // Cierra la sesión sin redirigir inmediatamente
-      router.push("/login"); // Redirige a la página de login después de un retraso
-      setIsLoggingOut(false); // Restablece el estado de isLoggingOut
-    }, 800); // Cambia el tiempo según lo que necesites
+      await signOut({ redirect: false });
+      setIsLoggingOut(false);
+      setShowSpotifyModal(true); // <-- Aquí se muestra el modal
+    }, 2000);
+  };
+
+  const handleSpotifyModalClose = () => {
+    setShowSpotifyModal(false);
+    router.push("/login"); // Redirige después de cerrar el modal
   };
 
   return (
     <div className="flex flex-col min-h-screen ">
-      {" "}
-      {/* Contenedor principal */}
       {isLoggingOut ? (
-        <div className="grid place-items-center h-dvh animate-fade-in">
+        <div className="grid h-screen place-items-center">
           <LogOutLoading />
         </div>
       ) : (
@@ -49,7 +54,6 @@ export default function PageProfile() {
           <div className="w-full">
             <MainHeader title="Profile" />
           </div>
-
           <main className="flex flex-col items-center justify-center flex-grow h-auto mx-8 space-y-10">
             <h2 className="text-3xl font-bold">Username</h2>
             <p className="text-xl">{session?.user?.name || "Test User"}</p>
@@ -77,9 +81,13 @@ export default function PageProfile() {
               </button>
             </div>
           </main>
+          <FooterRights />
         </>
       )}
-      <FooterRights /> {/* Footer siempre pegado a la base */}
+
+      {showSpotifyModal && (
+        <SpotifyLogoutInfoModal onClose={handleSpotifyModalClose} />
+      )}
     </div>
   );
 }
