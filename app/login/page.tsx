@@ -8,6 +8,7 @@ import FooterRights from "../../components/FooterRights";
 import ButtonSend from "../../ui/ButtonSend";
 import LogInLoading from "../../ui/LogInLoading";
 import { useForm } from "react-hook-form";
+import { signIn } from "next-auth/react";
 
 export type LoginFormInputs = {
   email: string;
@@ -54,6 +55,13 @@ export default function PageLogin() {
           >
             <LoginForm register={register} errors={errors} />
             <ButtonSend text="Log in" />
+            <button
+              type="button"
+              className="w-1/3 h-8 px-2 font-bold text-white bg-red-500 cursor-pointer rounded-xl hover:bg-red-600"
+              onClick={() => signIn("spotify")}
+            >
+              Log in with Spotify
+            </button>
           </form>
           <article className="flex flex-col items-center justify-center mt-20 space-y-3">
             <p className="text-lg text-green-500">
