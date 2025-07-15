@@ -31,7 +31,7 @@ export default function MenuHamburger({ links, onClose }: MenuHamburgerProps) {
     <>
       <motion.nav
         ref={menuRef}
-        className="absolute top-18 left-10 bg-gray-600 shadow-lg p-4 rounded-2xl w-auto h-auto text-center"
+        className="absolute top-10 left-5 bg-gray-600 shadow-lg p-4 rounded-2xl w-auto h-auto text-center"
         initial={{ opacity: 0, y: -10 }} // Initial state for animation
         animate={{ opacity: 1, y: 0 }} // Animation to apply when the menu opens
         exit={{ opacity: 0, y: -10 }} // Animation to apply when the menu closes

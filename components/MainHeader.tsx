@@ -33,26 +33,29 @@ export default function MainHeader({ title }: MainHeaderProps) {
   };
 
   return (
-    <header className="flex justify-evenly items-center my-8">
-      <button onClick={toggleMenu} className="relative z-20">
-        <motion.div
-          key={isOpen ? "close-icon" : "menu-icon"} // Unique keys for Framer Motion
-          initial={{ opacity: 1, scale: 0.8 }} // Initial state
-          animate={{ opacity: 1, scale: 1 }} // Final state
-          exit={{ opacity: 1, scale: 0.8 }} // Exit state
-          transition={{ duration: 0.3 }} // Smooth transition
-        >
-          {isOpen ? (
-            <RxCross2 className="h-10 w-10 text-green-500 hover:scale-110 transition-transform cursor-pointer z-10" />
-          ) : (
-            <GiHamburgerMenu className="h-10 w-10 text-green-500 hover:scale-110 transition-transform cursor-pointer z-10" />
-          )}
-        </motion.div>
-      </button>
-
-      {isOpen && (
-        <MenuHamburger links={navLinks} onClose={() => setIsOpen(false)} />
-      )}
+    <header className="flex justify-evenly items-center my-8 max-w-6xl mx-auto  ">
+      <div className="relative z-20">
+        {" "}
+        {/* Contenedor relativo para posicionar el menú */}
+        <button onClick={toggleMenu}>
+          <motion.div
+            key={isOpen ? "close-icon" : "menu-icon"} // Unique keys for Framer Motion
+            initial={{ opacity: 1, scale: 0.8 }} // Initial state
+            animate={{ opacity: 1, scale: 1 }} // Final state
+            exit={{ opacity: 1, scale: 0.8 }} // Exit state
+            transition={{ duration: 0.3 }} // Smooth transition
+          >
+            {isOpen ? (
+              <RxCross2 className="h-10 w-10 text-green-500 hover:scale-110 transition-transform cursor-pointer z-10" />
+            ) : (
+              <GiHamburgerMenu className="h-10 w-10 text-green-500 hover:scale-110 transition-transform cursor-pointer z-10" />
+            )}
+          </motion.div>
+        </button>
+        {isOpen && (
+          <MenuHamburger links={navLinks} onClose={() => setIsOpen(false)} />
+        )}
+      </div>
       <h1 className="text-center text-4xl text-orange-400 font-bold">
         {title}
       </h1>

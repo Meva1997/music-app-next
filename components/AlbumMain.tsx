@@ -6,7 +6,7 @@ export default function AlbumMain() {
       <div className="text-center text-2xl text-orange-500 font-bold my-8">
         Featured Albums
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-8 my-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-8 my-10 lg:max-w-4xl lg:mx-auto">
         {/* Example album cards */}
         {[...Array(3)].map((_, index) => (
           <div
