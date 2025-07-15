@@ -1,19 +1,36 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import MainHeader from "../../components/MainHeader";
 import { FaUserAltSlash, FaStar } from "react-icons/fa";
 import FooterRights from "../../components/FooterRights";
 import { useRouter } from "next/navigation";
 import LogOutLoading from "../../ui/LogOutLoading";
+import { useSession, signOut } from "next-auth/react";
 
 export default function PageProfile() {
   const [isLoggingOut, setIsLoggingOut] = useState(false); // Estado para controlar el renderizado
   const router = useRouter();
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login"); // Redirige a la página de login si no hay sesión
+    }
+  }, [status, router]);
+
+  if (status === "loading") {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <span className="text-lg">Cargando perfil...</span>
+      </div>
+    );
+  }
 
   const handleLogout = () => {
     setIsLoggingOut(true); // Muestra la página de LogOutLoading
-    setTimeout(() => {
+    setTimeout(async () => {
+      await signOut({ redirect: false }); // Cierra la sesión sin redirigir inmediatamente
       router.push("/login"); // Redirige a la página de login después de un retraso
       setIsLoggingOut(false); // Restablece el estado de isLoggingOut
     }, 800); // Cambia el tiempo según lo que necesites
@@ -35,7 +52,7 @@ export default function PageProfile() {
 
           <main className="flex flex-col items-center justify-center flex-grow h-auto mx-8 space-y-10">
             <h2 className="text-3xl font-bold">Username</h2>
-            <p className="text-xl">Test UserName</p>
+            <p className="text-xl">{session?.user?.name || "Test User"}</p>
             <p className="flex items-center gap-2 text-lg font-bold text-orange-400">
               <FaStar
                 className="text-2xl text-green-400"
