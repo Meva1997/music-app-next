@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 const handler = NextAuth({
   providers: [
@@ -8,6 +9,26 @@ const handler = NextAuth({
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
       authorization:
         "https://accounts.spotify.com/authorize?scope=user-read-email,user-read-private,user-read-playback-state,user-modify-playback-state,user-read-currently-playing",
+    }),
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        if (
+          credentials?.email === "email@email.com" &&
+          credentials?.password === "123456"
+        ) {
+          return {
+            id: "1",
+            name: "Test User",
+            email: "email@email.com",
+          };
+        }
+        return null; // Si las credenciales no son válidas, retorna null
+      },
     }),
   ],
   callbacks: {

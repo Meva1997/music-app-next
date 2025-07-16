@@ -9,6 +9,7 @@ import ButtonSend from "../../ui/ButtonSend";
 import LogInLoading from "../../ui/LogInLoading";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
+import Swal from "sweetalert2";
 
 export type LoginFormInputs = {
   email: string;
@@ -26,12 +27,27 @@ export default function PageLogin() {
     formState: { errors },
   } = useForm<LoginFormInputs>(); // Configura React Hook Form con los tipos del formulario
 
-  const loginForm = () => {
+  const loginForm = async (data: LoginFormInputs) => {
     setIsLoading(true);
     // console.log("Form Data:", formData); // Aquí puedes manejar el inicio de sesión, por ejemplo, enviando los datos a una API
+    const res = await signIn("credentials", {
+      redirect: false,
+      email: data.email,
+      password: data.password,
+    });
     setTimeout(() => {
       setIsLoading(false);
-      router.push("/"); // Redirige al usuario después de iniciar sesión
+      if (res?.ok) {
+        router.push("/"); // Redirige al usuario después de iniciar sesión
+      } else {
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Wrong credentials",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
     }, 800);
   };
 
