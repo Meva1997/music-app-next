@@ -27,7 +27,7 @@ const handler = NextAuth({
             email: "email@email.com",
           };
         }
-        return null; // Si las credenciales no son válidas, retorna null
+        return null;
       },
     }),
   ],
@@ -36,12 +36,14 @@ const handler = NextAuth({
       if (account) {
         token.accessToken = account.access_token;
         token.refreshToken = account.refresh_token;
+        token.provider = account.provider; // <-- ESTA LÍNEA ES CLAVE
       }
       return token;
     },
     async session({ session, token }) {
       session.accessToken = token.accessToken;
       session.refreshToken = token.refreshToken;
+      session.provider = token.provider as string | undefined; // <-- Aquí ya lo recibes bien
       return session;
     },
   },

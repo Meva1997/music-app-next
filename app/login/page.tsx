@@ -17,9 +17,8 @@ export type LoginFormInputs = {
 };
 
 export default function PageLogin() {
-  const [isLoading, setIsLoading] = useState(false);
-
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -28,34 +27,35 @@ export default function PageLogin() {
   } = useForm<LoginFormInputs>(); // Configura React Hook Form con los tipos del formulario
 
   const loginForm = async (data: LoginFormInputs) => {
-    setIsLoading(true);
     // console.log("Form Data:", formData); // Aquí puedes manejar el inicio de sesión, por ejemplo, enviando los datos a una API
     const res = await signIn("credentials", {
       redirect: false,
       email: data.email,
       password: data.password,
     });
-    setTimeout(() => {
-      setIsLoading(false);
-      if (res?.ok) {
+
+    if (res?.ok) {
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
         router.push("/"); // Redirige al usuario después de iniciar sesión
-      } else {
-        Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: "Wrong credentials",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      }
-    }, 800);
+      }, 2000); // Espera un segundo antes de redirigir
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Wrong credentials",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    }
   };
 
   return (
     <>
       {isLoading ? (
         <div className="grid place-items-center h-dvh animate-fade-in">
-          <LogInLoading userName="user" />
+          <LogInLoading />
         </div>
       ) : (
         <div className="flex flex-col min-h-screen space-y-10">

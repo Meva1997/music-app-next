@@ -85,7 +85,7 @@ export default function SpotifyProfile() {
             target="_blank"
             className="block mt-4 text-center text-green-500 hover:underline"
           >
-            Visita mi perfil de Spotify
+            Link to Spotify Profile
           </Link>
         </div>
       )}

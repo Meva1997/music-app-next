@@ -5,6 +5,7 @@ import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaUserAlt, FaComments, FaHome } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
+import { IoLogOut } from "react-icons/io5";
 import { motion } from "framer-motion"; // Import framer-motion for animations
 import MenuHamburger from "./MenuHamburger";
 
@@ -16,12 +17,17 @@ const navLinks = [
   {
     label: "Main Page",
     href: "/",
-    icon: <FaHome className="h-6 w-6" />,
+    icon: <FaHome className="w-6 h-6" />,
   },
   {
     label: "Comments",
     href: "/comments",
-    icon: <FaComments className="h-6 w-6" />,
+    icon: <FaComments className="w-6 h-6" />,
+  },
+  {
+    label: "Log Out",
+    href: "/profile",
+    icon: <IoLogOut className="w-6 h-6" />,
   },
 ];
 
@@ -33,7 +39,7 @@ export default function MainHeader({ title }: MainHeaderProps) {
   };
 
   return (
-    <header className="flex justify-evenly items-center my-8 max-w-6xl mx-auto  ">
+    <header className="flex items-center max-w-6xl mx-auto my-8 justify-evenly ">
       <div className="relative z-20">
         {" "}
         {/* Contenedor relativo para posicionar el menú */}
@@ -46,9 +52,9 @@ export default function MainHeader({ title }: MainHeaderProps) {
             transition={{ duration: 0.3 }} // Smooth transition
           >
             {isOpen ? (
-              <RxCross2 className="h-10 w-10 text-green-500 hover:scale-110 transition-transform cursor-pointer z-10" />
+              <RxCross2 className="z-10 w-10 h-10 text-green-500 transition-transform cursor-pointer hover:scale-110" />
             ) : (
-              <GiHamburgerMenu className="h-10 w-10 text-green-500 hover:scale-110 transition-transform cursor-pointer z-10" />
+              <GiHamburgerMenu className="z-10 w-10 h-10 text-green-500 transition-transform cursor-pointer hover:scale-110" />
             )}
           </motion.div>
         </button>
@@ -56,11 +62,11 @@ export default function MainHeader({ title }: MainHeaderProps) {
           <MenuHamburger links={navLinks} onClose={() => setIsOpen(false)} />
         )}
       </div>
-      <h1 className="text-center text-4xl text-orange-400 font-bold">
+      <h1 className="text-4xl font-bold text-center text-orange-400">
         {title}
       </h1>
       <Link href={"/profile"}>
-        <FaUserAlt className="h-8 w-8 text-green-500 hover:scale-110 transition-transform cursor-pointer z-10" />
+        <FaUserAlt className="z-10 w-8 h-8 text-green-500 transition-transform cursor-pointer hover:scale-110" />
       </Link>
     </header>
   );

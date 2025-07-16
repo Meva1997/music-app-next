@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+//! types for form inputs
+
 export type LoginFormInputs = {
   email: string;
   password: string;
@@ -9,6 +11,13 @@ export type LoginFormInputs = {
 export type SearchInputMain = {
   search: string; // Campo de búsqueda para artistas o álbumes
 };
+
+export type GenericProfileData = {
+  name?: string; // Nombre del usuario
+  email?: string; // Correo electrónico del usuario
+};
+
+//! Spotify User Schema
 
 export const spotifyUserSchema = z.object({
   display_name: z.string(),
