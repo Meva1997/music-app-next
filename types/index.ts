@@ -37,3 +37,25 @@ export const spotifyUserSchema = z.object({
   }),
 });
 export type SpotifyUser = z.infer<typeof spotifyUserSchema>;
+
+export const artistSpotifySearchSchema = z.object({
+  name: z.string(),
+  images: z.array(
+    z.object({
+      url: z.string().url(),
+      height: z.number().nullable().optional(),
+      width: z.number().nullable().optional(),
+    })
+  ),
+  genres: z.array(z.string()),
+  followers: z.object({
+    href: z.string().url().nullable(),
+    total: z.number(),
+  }),
+  external_urls: z.object({
+    spotify: z.string().url(),
+  }),
+  error: z.string().optional(), // Campo opcional para manejar errores
+});
+
+export type ArtistSpotifySearch = z.infer<typeof artistSpotifySearchSchema>;

@@ -1,7 +1,7 @@
 "use client";
 import { Suspense, useEffect, useState } from "react";
 import MainHeader from "../../components/MainHeader";
-import FooterRights from "../../components/FooterRights";
+import FooterRights from "../../components/footer/FooterRights";
 import { useRouter } from "next/navigation";
 import LogOutLoading from "../../ui/LogOutLoading";
 import { useSession, signOut } from "next-auth/react";

@@ -3,7 +3,7 @@ import LoginForm from "../../components/LoginForm";
 import { FaLock } from "react-icons/fa";
 import ButtonSend from "../../ui/ButtonSend";
 import Link from "next/link";
-import FooterRights from "../../components/FooterRights";
+import FooterRights from "../../components/footer/FooterRights";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../ui/ErrorMessage";
 import { LoginFormInputs } from "../../types";

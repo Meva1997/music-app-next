@@ -1,4 +1,4 @@
-import { currentYear } from "../utils/date";
+import { currentYear } from "../../utils/date";
 import { IoLogoGithub } from "react-icons/io";
 import { FaLinkedin, FaExternalLinkAlt } from "react-icons/fa";
 import PersonalLinks from "./PersonalLinks";
