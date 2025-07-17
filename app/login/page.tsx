@@ -73,7 +73,7 @@ export default function PageLogin() {
             <ButtonSend text="Log in" />
             <button
               type="button"
-              className="w-1/3 h-8 px-2 font-bold text-white bg-red-500 cursor-pointer rounded-xl hover:bg-red-600"
+              className="max-w-xl h-auto px-2 font-bold text-white bg-red-500 cursor-pointer rounded-xl hover:bg-red-700"
               onClick={() => signIn("spotify", { callbackUrl: "/" })}
             >
               Log in with Spotify
