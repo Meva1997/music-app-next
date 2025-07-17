@@ -4,13 +4,14 @@ Web application developed with Next.js to explore music, manage comments, and us
 
 ## Demo
 
-[View live demo on Vercel](https://music-app-next-rust.vercel.app/login)
-
 For a complete experience Log In With your Spotify Account!!!
 
 Credentials:
+
 Email: email@email.com  
 Password: 123456
+
+[View live demo on Vercel](https://music-app-next-rust.vercel.app/login)
 
 ## Features
 
