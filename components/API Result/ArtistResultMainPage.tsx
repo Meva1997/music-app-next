@@ -26,7 +26,7 @@ export default function ArtistResultMainPage({ artist }: ArtistResultProps) {
         rel="noopener noreferrer"
         className="text-green-600 underline"
       >
-        Ver en Spotify
+        View on Spotify
       </a>
     </div>
   );

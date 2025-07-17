@@ -10,6 +10,8 @@ import LoadingSpotifyProfileSkeleton from "../../ui/skeletons/LoadingSpotifyProf
 import GenericProfile from "../../components/profile/GenericProfile";
 import SpotifyLogoutInfoModal from "../../ui/SpotifyLogoutInfoModal";
 import Swal from "sweetalert2";
+import SpotifyTopItems from "@/components/profile/SpotifyTopItems";
+import SpotifyTopItemsSkeleton from "@/ui/skeletons/SpotifyTopItemsSkeleton";
 
 export default function PageProfile() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -79,11 +81,17 @@ export default function PageProfile() {
           </div>
           {hasSpotify ? (
             <>
+              <Suspense fallback={<SpotifyTopItemsSkeleton />}>
+                <SpotifyTopItems />
+              </Suspense>
+
+              <hr className="text-orange-500" />
+
               <Suspense fallback={<LoadingSpotifyProfileSkeleton />}>
                 <SpotifyProfile />
               </Suspense>
               <button
-                className="px-5 text-center text-orange-400 transition-all duration-300 border-2 border-green-400 rounded-md cursor-pointer w-[200px] mx-auto hover:scale-105"
+                className="px-5 text-center text-orange-400 transition-all duration-300 border-2 border-green-400 rounded-md cursor-pointer w-[200px] mx-auto hover:scale-105 mb-10"
                 type="button"
                 onClick={handleLogout}
               >
@@ -111,7 +119,3 @@ export default function PageProfile() {
     </div>
   );
 }
-
-// {showSpotifyModal && (
-//   <SpotifyLogoutInfoModal onClose={handleSpotifyModalClose} />
-// )}
