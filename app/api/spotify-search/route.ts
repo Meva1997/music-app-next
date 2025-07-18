@@ -1,10 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-  // artistSpotifySearchSchema,
-  // spotifyTrackSchema,
-  // spotifyArtistSchema,
-  spotifySearchResultSchema,
-} from "@/types/index";
+import { spotifySearchResultSchema } from "@/types/index";
 
 export async function GET(req: NextRequest) {
   // Extrae el parámetro de búsqueda desde la URL
