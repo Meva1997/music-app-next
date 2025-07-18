@@ -66,30 +66,34 @@ export default function PageLogin() {
             <h2 className="text-2xl font-black text-green-400">Login</h2>
           </header>
           <form
-            className="grid w-full mx-auto mt-20 space-y-10 place-items-center"
+            className="grid w-full mx-auto mt-5 space-y-10 place-items-center"
             onSubmit={handleSubmit(loginForm)} // Usa handleSubmit de React Hook Form
           >
             <LoginForm register={register} errors={errors} />
             <ButtonSend text="Log in" />
             <button
               type="button"
-              className="max-w-xl h-auto px-2 font-bold text-white bg-red-500 cursor-pointer rounded-xl hover:bg-red-700"
+              className="max-w-xl h-auto px-2 py-1 font-bold text-white bg-red-500 cursor-pointer rounded-xl hover:bg-red-700"
               onClick={() => signIn("spotify", { callbackUrl: "/" })}
             >
               Log in with Spotify
             </button>
           </form>
-          <article className="flex flex-col items-center justify-center mt-20 space-y-3">
-            <p className="text-lg text-green-500">
-              <Link
-                href="/registration"
-                className="hover:text-orange-400 hover:font-black active:text-orange-600"
-              >
-                First time? Register{" "}
-                <span className="font-black text-orange-400">here</span>
-              </Link>
+          <article className="flex flex-col items-center justify-center mt-10 space-y-3 bg-gray-800 px-5 py-3 rounded-lg w-2/3 max-w-lg mx-auto">
+            <p className="text-white">
+              To Log In using a generic user, use these credentials:
             </p>
-            <p className="text-lg text-green-500">Forgot Password?</p>
+            <ul className="text-white list-disc list-inside">
+              <li>
+                <strong>Email:</strong> email@email.com
+              </li>
+              <li>
+                <strong>Password:</strong> 123456
+              </li>
+            </ul>
+            <span className="text-yellow-400 font-bold">
+              Warning! You won't have a full experience using the generic user.
+            </span>
           </article>
 
           <FooterRights />
