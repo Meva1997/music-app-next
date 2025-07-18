@@ -6,7 +6,7 @@ import MainHeader from "../../components/MainHeader";
 import CommentsSkeleton from "../../ui/skeletons/CommentsSkeleton";
 import NewCommentary from "../../components/commentaries/NewCommentary";
 
-export default function page() {
+export default function CommentsPage() {
   const [comments, setComments] = useState<
     { author: string; commentary: string }[]
   >([
