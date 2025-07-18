@@ -1,9 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
+import {
+  // artistSpotifySearchSchema,
+  // spotifyTrackSchema,
+  // spotifyArtistSchema,
+  spotifySearchResultSchema,
+} from "@/types/index";
 
 export async function GET(req: NextRequest) {
   // Extrae el parámetro de búsqueda desde la URL
   const { searchParams } = new URL(req.url);
   const query = searchParams.get("query");
+  const type = searchParams.get("type") ?? "artist,track";
+  const limit = searchParams.get("limit") ?? "10";
   // Lee las variables de entorno (client id y secret)
   const clientId = process.env.SPOTIFY_CLIENT_ID!;
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET!;
@@ -25,13 +33,21 @@ export async function GET(req: NextRequest) {
   const spotifyRes = await fetch(
     `https://api.spotify.com/v1/search?q=${encodeURIComponent(
       query ?? ""
-    )}&type=artist&limit=1`,
+    )}&type=${type}&limit=${limit}`,
     {
       headers: { Authorization: `Bearer ${access_token}` },
     }
   );
   const data = await spotifyRes.json();
 
+  const result = spotifySearchResultSchema.safeParse(data);
+  if (!result.success) {
+    return NextResponse.json(
+      { error: "Invalid response format from Spotify" },
+      { status: 500 }
+    );
+  }
+
   // Devuelve el resultado en JSON (al frontend)
-  return NextResponse.json(data);
+  return NextResponse.json(result.data);
 }

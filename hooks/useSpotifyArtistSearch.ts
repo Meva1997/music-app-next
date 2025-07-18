@@ -1,32 +1,53 @@
 import { useState } from "react";
-import { ArtistSpotifySearch, artistSpotifySearchSchema } from "../types";
+import {
+  ArtistSpotifySearch,
+  spotifySearchResultSchema,
+  SpotifyTrack,
+} from "../types";
 
-export function useSpotifyArtistSearch() {
-  const [artistResult, setArtistResult] = useState<ArtistSpotifySearch | null>(
-    null
-  );
+type SearchResult = {
+  artists?: ArtistSpotifySearch[];
+  tracks?: SpotifyTrack[];
+};
+
+export function useSpotifySearch() {
+  const [result, setResult] = useState<SearchResult | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  async function searchArtist(query: string) {
+  async function searchSpotify(
+    query: string,
+    type: string = "artist, track",
+    limit: number = 10
+  ) {
     setLoading(true);
-    setArtistResult(null);
+    setResult(null);
     setErrorMessage(null);
     try {
       const res = await fetch(
-        `/api/spotify-search?query=${encodeURIComponent(query)}`
+        `/api/spotify-search?query=${encodeURIComponent(
+          query
+        )}&type=${type}&limit=${limit}`
       );
       const data = await res.json();
-      const artist = data.artists?.items?.[0];
-      if (artist) {
-        const parseResult = artistSpotifySearchSchema.safeParse(artist);
-        if (parseResult.success) {
-          setArtistResult(parseResult.data);
-        } else {
-          setErrorMessage("Result format is invalid.");
-        }
-      } else {
-        setErrorMessage("Artist not found.");
+
+      const result = spotifySearchResultSchema.safeParse(data);
+      if (!result.success) {
+        setErrorMessage("Invalid data from Spotify API.");
+        setLoading(false);
+        return;
+      }
+
+      setResult({
+        artists: result.data.artists?.items ?? [],
+        tracks: result.data.tracks?.items ?? [],
+      });
+
+      if (
+        !result.data.artists?.items?.length &&
+        !result.data.tracks?.items?.length
+      ) {
+        setErrorMessage("No results found.");
       }
     } catch (_error) {
       setErrorMessage("Search failed. Please try again.");
@@ -35,11 +56,9 @@ export function useSpotifyArtistSearch() {
   }
 
   return {
-    artistResult,
+    result,
     errorMessage,
     loading,
-    searchArtist,
-    setArtistResult,
-    setErrorMessage,
+    searchSpotify,
   };
 }

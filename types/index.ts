@@ -144,3 +144,20 @@ export const artistSpotifySearchSchema = z.object({
 });
 
 export type ArtistSpotifySearch = z.infer<typeof artistSpotifySearchSchema>;
+
+//! Spotify Search all
+export const spotifySearchResultSchema = z.object({
+  artists: z
+    .object({
+      items: z.array(artistSpotifySearchSchema).optional(),
+    })
+    .optional(),
+  tracks: z
+    .object({
+      items: z.array(spotifyTrackSchema).optional(),
+    })
+    .optional(),
+  // Agrega albums y playlists si tienes schemas
+});
+
+export type SpotifySearchResult = z.infer<typeof spotifySearchResultSchema>;

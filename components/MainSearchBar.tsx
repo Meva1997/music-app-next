@@ -3,7 +3,9 @@ import { SearchInputMain } from "../types";
 import ErrorMessage from "../ui/ErrorMessage";
 import ArtistResultMainPage from "./API Result/ArtistResultMainPage";
 import LoadingMessage from "../ui/spinner artist search /LoadingMessage";
-import { useSpotifyArtistSearch } from "../hooks/useSpotifyArtistSearch";
+import { useSpotifySearch } from "../hooks/useSpotifyArtistSearch";
+import { Suspense } from "react";
+import TrackResultMainPage from "./API Result/TrackResultMainPage";
 
 export default function MainSearchBar() {
   const {
@@ -13,11 +15,10 @@ export default function MainSearchBar() {
     formState: { errors },
   } = useForm<SearchInputMain>();
 
-  const { artistResult, errorMessage, loading, searchArtist } =
-    useSpotifyArtistSearch();
+  const { result, errorMessage, loading, searchSpotify } = useSpotifySearch();
 
   const onSubmit = (data: SearchInputMain) => {
-    searchArtist(data.search);
+    searchSpotify(data.search, "artist,track", 10);
     reset();
   };
 
@@ -31,7 +32,7 @@ export default function MainSearchBar() {
           <input
             type="text"
             className="w-2/3 h-10 text-center text-white bg-transparent border-2 border-orange-400 appearance-none rounded-xl outline-orange-600"
-            placeholder="Search for an artist name"
+            placeholder="Search for an artist or song name"
             {...register("search", {
               required: "Enter an artist name",
             })}
@@ -48,7 +49,18 @@ export default function MainSearchBar() {
       </section>
       <ErrorMessage message={errors.search?.message} />
       {loading && <LoadingMessage />}
-      {artistResult && <ArtistResultMainPage artist={artistResult} />}
+      {!result?.artists?.length && !result?.tracks?.length && !loading && (
+        <p className="text-center text-white text-3xl animate-pulse absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          First search for an artist or song name. Results will appear here.
+        </p>
+      )}
+      {result?.artists && result.artists.length > 0 && (
+        <Suspense fallback={<LoadingMessage />}>
+          <ArtistResultMainPage artists={result.artists} />
+          <hr className="text-green-500" />
+          <TrackResultMainPage tracks={result.tracks || []} />
+        </Suspense>
+      )}
       <ErrorMessage message={errorMessage} />
     </>
   );
