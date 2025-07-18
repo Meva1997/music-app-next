@@ -24,7 +24,7 @@ export default function MainSearchBar() {
 
   return (
     <>
-      <section className="flex items-center justify-center h-8 max-w-2xl gap-2 mx-8 mt-10 md:w-1/2 md:mx-auto">
+      <section className="relative flex items-center justify-center h-8 max-w-2xl gap-2 mx-8 mt-10 md:w-1/2 md:mx-auto">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex items-center w-full gap-2"
@@ -49,11 +49,15 @@ export default function MainSearchBar() {
       </section>
       <ErrorMessage message={errors.search?.message} />
       {loading && <LoadingMessage />}
+
       {!result?.artists?.length && !result?.tracks?.length && !loading && (
-        <p className="text-center text-white text-3xl animate-pulse absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          First search for an artist or song name. Results will appear here.
-        </p>
+        <div className="flex items-center justify-center my-20 h-auto max-w-3xl mx-auto px-8">
+          <p className="text-center text-white text-xl animate-pulse ">
+            First search for an artist or song name. Results will appear here.
+          </p>
+        </div>
       )}
+
       {result?.artists && result.artists.length > 0 && (
         <Suspense fallback={<LoadingMessage />}>
           <ArtistResultMainPage artists={result.artists} />
