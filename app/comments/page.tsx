@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import CommentsSection from "../../components/commentaries/CommentsSection";
 import FooterRights from "../../components/footer/FooterRights";
 import MainHeader from "../../components/MainHeader";
