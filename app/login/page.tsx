@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import LoginForm from "../../components/LoginForm";
 import FooterRights from "../../components/footer/FooterRights";
 import ButtonSend from "../../ui/ButtonSend";
