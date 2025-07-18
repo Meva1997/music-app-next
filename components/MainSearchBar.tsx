@@ -49,12 +49,12 @@ export default function MainSearchBar() {
         </form>
       </section>
       {/* Switch de vista */}
-      <section className="flex justify-center gap-4 my-5">
+      <section className="flex justify-center gap-4 my-5 font-bold">
         <button
           className={`px-4 py-2 rounded ${
             view === "artists"
-              ? "bg-green-500 text-black "
-              : "bg-gray-700 text-orange-400 cursor-pointer hover:bg-gray-800"
+              ? "bg-green-500 text-white "
+              : "bg-gray-700 cursor-pointer hover:bg-orange-800"
           }`}
           onClick={() => setView("artists")}
         >
@@ -63,8 +63,8 @@ export default function MainSearchBar() {
         <button
           className={`px-4 py-2 rounded ${
             view === "tracks"
-              ? "bg-green-500 text-black"
-              : "bg-gray-700 text-orange-400 cursor-pointer hover:bg-gray-800"
+              ? "bg-green-500 text-white"
+              : "bg-gray-700 cursor-pointer hover:bg-orange-800"
           }`}
           onClick={() => setView("tracks")}
         >
@@ -73,7 +73,7 @@ export default function MainSearchBar() {
       </section>
 
       {!loading && !result && (
-        <div className="flex items-center justify-center h-64 text-gray-500 animate-pulse">
+        <div className="flex items-center justify-center h-64 text-gray-500 animate-pulse max-w-xl mx-auto px-5 text-center">
           Your search results will appear here. Please enter a search term.
         </div>
       )}
