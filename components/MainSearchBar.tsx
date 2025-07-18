@@ -1,10 +1,10 @@
+import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import { SearchInputMain } from "../types";
 import ErrorMessage from "../ui/ErrorMessage";
 import ArtistResultMainPage from "./API Result/ArtistResultMainPage";
 import LoadingMessage from "../ui/spinner artist search /LoadingMessage";
 import { useSpotifySearch } from "../hooks/useSpotifyArtistSearch";
-import { Suspense, useState } from "react";
 import TrackResultMainPage from "./API Result/TrackResultMainPage";
 
 export default function MainSearchBar() {
@@ -71,6 +71,12 @@ export default function MainSearchBar() {
           Tracks
         </button>
       </section>
+
+      {!loading && !result && (
+        <div className="flex items-center justify-center h-64 text-gray-500 animate-pulse">
+          Your search results will appear here. Please enter a search term.
+        </div>
+      )}
       <ErrorMessage message={errors.search?.message} />
 
       {/* Loading message and results */}
