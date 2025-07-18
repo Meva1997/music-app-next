@@ -12,7 +12,7 @@ export default function TrackResultMainPage({ tracks }: TrackResultProps) {
 
   return (
     <>
-      <h1 className="text-center my-5 text-3xl font-bold text-orange-500">
+      <h1 className="text-center my-5 text-3xl font-bold text-orange-500 ">
         Tracks
       </h1>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-10 max-w-5xl mx-auto px-10">
@@ -21,7 +21,7 @@ export default function TrackResultMainPage({ tracks }: TrackResultProps) {
             key={track.id}
             className="text-center bg-gray-800 p-3 rounded-lg space-y-5"
           >
-            <h2 className="text-lg font-bold text-green-500">{track.name}</h2>
+            <h2 className="text-lg font-bold">{track.name}</h2>
             <Image
               src={track.album.images[0]?.url}
               alt={track.name}

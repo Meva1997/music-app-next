@@ -4,7 +4,7 @@ import ErrorMessage from "../ui/ErrorMessage";
 import ArtistResultMainPage from "./API Result/ArtistResultMainPage";
 import LoadingMessage from "../ui/spinner artist search /LoadingMessage";
 import { useSpotifySearch } from "../hooks/useSpotifyArtistSearch";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import TrackResultMainPage from "./API Result/TrackResultMainPage";
 
 export default function MainSearchBar() {
@@ -15,6 +15,7 @@ export default function MainSearchBar() {
     formState: { errors },
   } = useForm<SearchInputMain>();
 
+  const [view, setView] = useState<"artists" | "tracks">("artists");
   const { result, errorMessage, loading, searchSpotify } = useSpotifySearch();
 
   const onSubmit = (data: SearchInputMain) => {
@@ -47,21 +48,40 @@ export default function MainSearchBar() {
           </button>
         </form>
       </section>
+      {/* Switch de vista */}
+      <section className="flex justify-center gap-4 my-5">
+        <button
+          className={`px-4 py-2 rounded ${
+            view === "artists"
+              ? "bg-green-500 text-black "
+              : "bg-gray-700 text-orange-400 cursor-pointer hover:bg-gray-800"
+          }`}
+          onClick={() => setView("artists")}
+        >
+          Artists
+        </button>
+        <button
+          className={`px-4 py-2 rounded ${
+            view === "tracks"
+              ? "bg-green-500 text-black"
+              : "bg-gray-700 text-orange-400 cursor-pointer hover:bg-gray-800"
+          }`}
+          onClick={() => setView("tracks")}
+        >
+          Tracks
+        </button>
+      </section>
       <ErrorMessage message={errors.search?.message} />
+
+      {/* Loading message and results */}
       {loading && <LoadingMessage />}
-
-      {!result?.artists?.length && !result?.tracks?.length && !loading && (
-        <div className="flex items-center justify-center my-20 h-auto max-w-3xl mx-auto px-8">
-          <p className="text-center text-white text-xl animate-pulse ">
-            First search for an artist or song name. Results will appear here.
-          </p>
-        </div>
-      )}
-
-      {result?.artists && result.artists.length > 0 && (
+      {!loading && view === "artists" && result?.artists?.length && (
         <Suspense fallback={<LoadingMessage />}>
           <ArtistResultMainPage artists={result.artists} />
-          <hr className="text-green-500" />
+        </Suspense>
+      )}
+      {!loading && view === "tracks" && result?.tracks?.length && (
+        <Suspense fallback={<LoadingMessage />}>
           <TrackResultMainPage tracks={result.tracks || []} />
         </Suspense>
       )}
