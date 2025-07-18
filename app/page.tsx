@@ -1,10 +1,7 @@
 "use client";
 
-import { Suspense } from "react";
-import AlbumMain from "../components/AlbumMain";
 import FooterRights from "../components/footer/FooterRights";
 import MainHeader from "../components/MainHeader";
-import LoadingMainSkeleton from "../ui/skeletons/LoadingMainSkeleton";
 import MainSearchBar from "../components/MainSearchBar";
 
 export default function Home() {
