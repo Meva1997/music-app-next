@@ -91,7 +91,8 @@ export default function PageLogin() {
               </li>
             </ul>
             <span className="text-yellow-400 font-bold">
-              Warning! You won't have a full experience using the generic user.
+              Warning! You won&#39;t have a full experience using the generic
+              user.
             </span>
           </article>
 
