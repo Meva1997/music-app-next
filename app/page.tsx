@@ -18,11 +18,6 @@ export default function Home() {
           {" "}
           {/* flex-grow para ocupar el espacio disponible */}
           <MainSearchBar />
-          <section className="h-auto">
-            <Suspense fallback={<LoadingMainSkeleton />}>
-              <AlbumMain />
-            </Suspense>
-          </section>
         </main>
         <FooterRights /> {/* Footer automáticamente pegado a la base */}
       </div>
